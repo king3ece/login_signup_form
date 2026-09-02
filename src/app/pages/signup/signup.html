@@ -1,0 +1,348 @@
+<div class="auth-page">
+
+  <div class="auth-container">
+
+    <!-- Cover -->
+    <div class="auth-cover">
+
+      <div class="cover-content">
+
+        <div class="logo">
+          MyApp
+        </div>
+
+        <h1>Rejoignez-nous !</h1>
+
+        <p>
+          Créez votre compte gratuitement et
+          commencez dès maintenant à utiliser
+          notre plateforme.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- Form -->
+    <div class="auth-form-container">
+
+      <div class="auth-form">
+
+        <div class="mobile-logo">
+          MyApp
+        </div>
+
+
+        <div class="form-header">
+
+          <h2>Créer un compte</h2>
+
+          <p>
+            Remplissez les informations ci-dessous
+          </p>
+
+        </div>
+
+
+        <form
+          [formGroup]="signupForm"
+          (ngSubmit)="submit()"
+          novalidate
+        >
+
+          <!-- First name / Last name -->
+          <div class="name-row">
+
+            <div class="form-group">
+
+              <label for="firstName">
+                Prénom
+              </label>
+
+              <input
+                id="firstName"
+                type="text"
+                formControlName="firstName"
+                placeholder="Jean"
+                [class.input-error]="
+                  firstName.invalid &&
+                  firstName.touched
+                "
+              />
+
+              @if (
+                firstName.touched &&
+                firstName.hasError('required')
+              ) {
+                <span class="error-message">
+                  Le prénom est obligatoire.
+                </span>
+              }
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="lastName">
+                Nom
+              </label>
+
+              <input
+                id="lastName"
+                type="text"
+                formControlName="lastName"
+                placeholder="Dupont"
+                [class.input-error]="
+                  lastName.invalid &&
+                  lastName.touched
+                "
+              />
+
+              @if (
+                lastName.touched &&
+                lastName.hasError('required')
+              ) {
+                <span class="error-message">
+                  Le nom est obligatoire.
+                </span>
+              }
+
+            </div>
+
+          </div>
+
+
+          <!-- Email -->
+          <div class="form-group">
+
+            <label for="email">
+              Adresse email
+            </label>
+
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              placeholder="exemple@email.com"
+              [class.input-error]="
+                email.invalid &&
+                email.touched
+              "
+            />
+
+            @if (
+              email.touched &&
+              email.hasError('required')
+            ) {
+              <span class="error-message">
+                L'adresse email est obligatoire.
+              </span>
+            }
+
+            @if (
+              email.touched &&
+              email.hasError('email')
+            ) {
+              <span class="error-message">
+                Adresse email invalide.
+              </span>
+            }
+
+          </div>
+
+
+          <!-- Password -->
+          <div class="form-group">
+
+            <label for="password">
+              Mot de passe
+            </label>
+
+            <div class="password-wrapper">
+
+              <input
+                id="password"
+                [type]="
+                  showPassword
+                    ? 'text'
+                    : 'password'
+                "
+                formControlName="password"
+                placeholder="Minimum 6 caractères"
+                [class.input-error]="
+                  password.invalid &&
+                  password.touched
+                "
+              />
+
+              <button
+                type="button"
+                class="password-toggle"
+                (click)="togglePassword()"
+              >
+                {{
+                  showPassword
+                    ? 'Masquer'
+                    : 'Afficher'
+                }}
+              </button>
+
+            </div>
+
+
+            @if (
+              password.touched &&
+              password.hasError('required')
+            ) {
+              <span class="error-message">
+                Le mot de passe est obligatoire.
+              </span>
+            }
+
+            @if (
+              password.touched &&
+              password.hasError('minlength')
+            ) {
+              <span class="error-message">
+                Minimum 6 caractères.
+              </span>
+            }
+
+          </div>
+
+
+          <!-- Confirm password -->
+          <div class="form-group">
+
+            <label for="confirmPassword">
+              Confirmer le mot de passe
+            </label>
+
+            <div class="password-wrapper">
+
+              <input
+                id="confirmPassword"
+                [type]="
+                  showConfirmPassword
+                    ? 'text'
+                    : 'password'
+                "
+                formControlName="confirmPassword"
+                placeholder="Confirmez votre mot de passe"
+                [class.input-error]="
+                  (
+                    confirmPassword.touched &&
+                    confirmPassword.invalid
+                  ) ||
+                  (
+                    confirmPassword.touched &&
+                    signupForm.hasError('passwordMismatch')
+                  )
+                "
+              />
+
+              <button
+                type="button"
+                class="password-toggle"
+                (click)="toggleConfirmPassword()"
+              >
+                {{
+                  showConfirmPassword
+                    ? 'Masquer'
+                    : 'Afficher'
+                }}
+              </button>
+
+            </div>
+
+
+            @if (
+              confirmPassword.touched &&
+              confirmPassword.hasError('required')
+            ) {
+              <span class="error-message">
+                Veuillez confirmer votre mot de passe.
+              </span>
+            }
+
+            @if (
+              confirmPassword.touched &&
+              signupForm.hasError('passwordMismatch')
+            ) {
+              <span class="error-message">
+                Les mots de passe ne correspondent pas.
+              </span>
+            }
+
+          </div>
+
+
+          <!-- Terms -->
+          <div class="terms">
+
+            <label>
+
+              <input
+                type="checkbox"
+                formControlName="terms"
+              />
+
+              <span>
+                J'accepte les
+                <a href="#">
+                  conditions d'utilisation
+                </a>
+                et la
+                <a href="#">
+                  politique de confidentialité
+                </a>.
+              </span>
+
+            </label>
+
+
+            @if (
+              terms.touched &&
+              terms.hasError('required')
+            ) {
+              <span class="error-message">
+                Vous devez accepter les conditions.
+              </span>
+            }
+
+          </div>
+
+
+          <!-- Submit -->
+          <button
+            type="submit"
+            class="submit-button"
+          >
+            Créer mon compte
+          </button>
+
+        </form>
+
+
+        <!-- Login -->
+        <div class="switch-auth">
+
+          <span>
+            Vous avez déjà un compte ?
+          </span>
+
+          <a routerLink="/login">
+            Se connecter
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

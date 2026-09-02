@@ -1,0 +1,181 @@
+<div class="auth-page">
+
+  <div class="auth-container">
+
+    <!-- Partie gauche -->
+    <div class="auth-cover">
+
+      <div class="cover-content">
+
+        <div class="logo">
+          MyApp
+        </div>
+
+        <h1>Bienvenue !</h1>
+
+        <p>
+          Connectez-vous à votre compte et
+          profitez de toutes nos fonctionnalités.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- Partie formulaire -->
+    <div class="auth-form-container">
+
+      <div class="auth-form">
+
+        <div class="mobile-logo">
+          MyApp
+        </div>
+
+        <div class="form-header">
+
+          <h2>Connexion</h2>
+
+          <p>
+            Connectez-vous à votre compte
+          </p>
+
+        </div>
+
+
+        <form
+          [formGroup]="loginForm"
+          (ngSubmit)="submit()"
+          novalidate
+        >
+
+          <!-- Email -->
+          <div class="form-group">
+
+            <label for="email">
+              Adresse email
+            </label>
+
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              placeholder="exemple@email.com"
+              [class.input-error]="email.invalid && email.touched"
+            />
+
+            @if (email.touched && email.hasError('required')) {
+              <span class="error-message">
+                L'adresse email est obligatoire.
+              </span>
+            }
+
+            @if (email.touched && email.hasError('email')) {
+              <span class="error-message">
+                Veuillez entrer une adresse email valide.
+              </span>
+            }
+
+          </div>
+
+
+          <!-- Password -->
+          <div class="form-group">
+
+            <div class="label-row">
+
+              <label for="password">
+                Mot de passe
+              </label>
+
+              <a href="#" class="forgot-password">
+                Mot de passe oublié ?
+              </a>
+
+            </div>
+
+
+            <div class="password-wrapper">
+
+              <input
+                id="password"
+                [type]="showPassword ? 'text' : 'password'"
+                formControlName="password"
+                placeholder="Votre mot de passe"
+                [class.input-error]="password.invalid && password.touched"
+              />
+
+              <button
+                type="button"
+                class="password-toggle"
+                (click)="togglePassword()"
+              >
+                {{ showPassword ? 'Masquer' : 'Afficher' }}
+              </button>
+
+            </div>
+
+
+            @if (password.touched && password.hasError('required')) {
+              <span class="error-message">
+                Le mot de passe est obligatoire.
+              </span>
+            }
+
+            @if (password.touched && password.hasError('minlength')) {
+              <span class="error-message">
+                Le mot de passe doit contenir au moins 6 caractères.
+              </span>
+            }
+
+          </div>
+
+
+          <!-- Remember me -->
+          <div class="remember">
+
+            <label>
+              <input
+                type="checkbox"
+                formControlName="rememberMe"
+              />
+
+              <span>
+                Se souvenir de moi
+              </span>
+            </label>
+
+          </div>
+
+
+          <!-- Submit -->
+          <button
+            type="submit"
+            class="submit-button"
+          >
+            Se connecter
+          </button>
+
+        </form>
+
+
+        <!-- Signup -->
+        <div class="switch-auth">
+
+          <span>
+            Vous n'avez pas encore de compte ?
+          </span>
+
+          <a routerLink="/signup">
+            Créer un compte
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
