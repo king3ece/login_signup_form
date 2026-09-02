@@ -58,7 +58,7 @@ Suis ces étapes pour installer et lancer le projet sur ta machine locale :
 
 ### 1. Cloner le projet
 ```bash
-git clone <URL_DU_REPOSITORY>
+git clone https://github.com/king3ece/login_signup_form.git
 ```
 
 ### 2. Accéder au dossier du projet
@@ -66,9 +66,9 @@ git clone <URL_DU_REPOSITORY>
 cd LoginSignupForm
 ```
 
-### 3. Installer les dépendances npm
+### 3. Installer les dépendances pnpm
 ```bash
-npm install
+pnpm install
 ```
 
 ---
@@ -204,7 +204,7 @@ Pour approfondir tes connaissances sur l'utilisation et la configuration d'**Ang
 
 ## 👨‍💻 Auteur
 
-**Ton Nom** – *Développeur Principal*
+**Ton Nom** – *Elias Comla EGNONGLO*
 
 Projet réalisé avec ❤️ et propulsé par la puissance d'**Angular**.
 
